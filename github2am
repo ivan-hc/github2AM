@@ -5,9 +5,9 @@ case "$1" in
   '-t'|'template'|'convert')
 	while [ -n "$1" ]
 	do
-	rm -f /opt/aih2am/download-args
-	echo $@ | tr ' ' '\n' >> /opt/aih2am/download-args && echo STOP >> /opt/aih2am/download-args
-	ARGS=$(sed '1d' /opt/aih2am/download-args)
+	rm -f /opt/github2am/download-args
+	echo $@ | tr ' ' '\n' >> /opt/github2am/download-args && echo STOP >> /opt/github2am/download-args
+	ARGS=$(sed '1d' /opt/github2am/download-args)
 	for arg in $ARGS; do
 	for var in $arg; do
 	if [ $arg == STOP ]; then
@@ -36,8 +36,9 @@ case "$1" in
 	echo '◆ '$APP' : '$COMMENT'' >> ./list
 	echo " ------------------------------------------------
 	
-	CREATING "$APP"
+	CREATING A SCRIPT FOR "$APP"
 	" | tr a-z A-Z
+	echo " ------------------------------------------------"
 	echo "" 
 	echo " LIST OF CATEGORIES:
 
