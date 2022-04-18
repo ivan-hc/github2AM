@@ -33,7 +33,7 @@ case "$1" in
 	echo "$COMMENT" >> ./ABOUT/$APP 
 	echo " " >> ./ABOUT/$APP 
 	echo " SITE: https://github.com/$REPO" >> ./ABOUT/$APP 
-	echo '◆ '$APP' : '$COMMENT'' >> ./list
+	echo '◆ '$APP' :'$COMMENT'' >> ./list
 	echo " ------------------------------------------------
 	
 	CREATING A SCRIPT FOR "$APP"
