@@ -30,7 +30,7 @@ case "$1" in
 	sed -i s#REPLACETHIS#$arg#g $APP
 	chmod a+x $APP
 	echo " " >> ./ABOUT/$APP 
-	echo " $COMMENT" >> ./ABOUT/$APP 
+	echo "$COMMENT" >> ./ABOUT/$APP 
 	echo " " >> ./ABOUT/$APP 
 	echo " SITE: https://github.com/$REPO" >> ./ABOUT/$APP 
 	echo '◆ '$APP' : '$COMMENT'' >> ./list
