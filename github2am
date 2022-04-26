@@ -24,7 +24,26 @@ case "$1" in
 	REPO2=$(echo $REPO | sed 's:.*/::')
 	APP=$( echo $REPO2 | tr A-Z a-z | sed s/_/-/g )
 	COMMENT=$(curl https://api.github.com/repos/$REPO 2>/dev/null | grep description | sed 's/"description": "//' | sed 's/",//')
-	wget -c $URL/templates/AM-SAMPLE-GitHub-generic -O $APP
+	echo " ------------------------------------------------"
+	echo "
+	SELECT A FILE FORMAT TO DOWNLOAD:
+
+	1) APPIMAGE
+	2) DEB
+	3) TAR
+	4) ZIP
+
+	"
+	read -r -p " CHOOSE A FILE FORMAT : " fileformat
+	case "$fileformat" in
+	1) wget -c $URL/templates/AM-SAMPLE-GitHub-generic-appimage -O $APP;;
+	2) wget -c $URL/templates/AM-SAMPLE-GitHub-generic-deb -O $APP;;
+	3) wget -c $URL/templates/AM-SAMPLE-GitHub-generic-tar -O $APP;;
+	4) wget -c $URL/templates/AM-SAMPLE-GitHub-generic-zip -O $APP;;
+	*) echo "
+	NO FILE FORMAT HAS BEEN SELECTED, EXITING!
+	"; exit;;
+	esac
 	sed -i s/SAMPLE/$APP/g $APP
 	sed -i s#REPLACETHIS#$arg#g $APP
 	chmod a+x $APP
@@ -76,7 +95,13 @@ case "$1" in
 	echo "" 
 	read -r -p " COPY THE LINK URL TO THE ICON AND PASTE IT HERE : " RESPONSE
 	case "$RESPONSE" in
-    	*) sed -i s#YOURICONURL#$RESPONSE#g $APP;;
+    	*) sed -i s#YOURICONURL#$RESPONSE#g $APP
+	echo " ------------------------------------------------"
+	echo "
+
+	ALL FILES HAVE BEEN SAVED ON THE DESKTOP, HAVE FUN!
+
+	";;
 	esac
 
 	done
@@ -88,5 +113,5 @@ case "$1" in
 	done
 	shift;;
    *) echo ""; echo ' USAGE: github2am convert $USER/$REPO'; echo ""
- 	echo ' where $USER/$REPO is the name of repository where the app is hosted.'; echo "";;
+ 	echo ' where $USER/$REPO is the name of repository where the app is hosted.';;
 esac
