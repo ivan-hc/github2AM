@@ -24,7 +24,6 @@ case "$1" in
 	REPO2=$(echo $REPO | sed 's:.*/::')
 	APP=$( echo $REPO2 | tr A-Z a-z | sed s/_/-/g )
 	COMMENT=$(curl https://api.github.com/repos/$REPO 2>/dev/null | grep description | sed 's/"description": "//' | sed 's/",//')
-	REPO=$(curl -L -s https://raw.githubusercontent.com/AppImage/appimage.github.io/master/apps/$arg.md | grep -A1 "type: GitHub" | sed -n 2p | cut -c 10-)
 	wget -c $URL/templates/AM-SAMPLE-GitHub-generic -O $APP
 	sed -i s/SAMPLE/$APP/g $APP
 	sed -i s#REPLACETHIS#$arg#g $APP
