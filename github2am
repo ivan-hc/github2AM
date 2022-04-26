@@ -24,6 +24,14 @@ case "$1" in
 	REPO2=$(echo $REPO | sed 's:.*/::')
 	APP=$( echo $REPO2 | tr A-Z a-z | sed s/_/-/g )
 	COMMENT=$(curl https://api.github.com/repos/$REPO 2>/dev/null | grep description | sed 's/"description": "//' | sed 's/",//')
+	clear
+	echo ""
+	echo ' WELCOME, THIS SCRIPT WILL HELP YOU CREATE AN INSTALLATION AND / OR'
+	echo ' INTEGRATION SCRIPT FOR YOUR APPLICATIONS FROM GITHUB.COM.'
+	echo ' THESE SCRIPTS ARE COMPILED TO WORK WITH "AM" APPLICATION MANAGER.'
+	echo ""
+	echo " SITE: https://github.com/ivan-hc/AM-Application-Manager
+	"
 	echo " ------------------------------------------------"
 	echo "
 	SELECT A FILE FORMAT TO DOWNLOAD:
@@ -36,10 +44,10 @@ case "$1" in
 	"
 	read -r -p " CHOOSE A FILE FORMAT : " fileformat
 	case "$fileformat" in
-	1) wget -c $URL/templates/AM-SAMPLE-GitHub-generic-appimage -O $APP;;
-	2) wget -c $URL/templates/AM-SAMPLE-GitHub-generic-deb -O $APP;;
-	3) wget -c $URL/templates/AM-SAMPLE-GitHub-generic-tar -O $APP;;
-	4) wget -c $URL/templates/AM-SAMPLE-GitHub-generic-zip -O $APP;;
+	1) wget -c -q $URL/templates/AM-SAMPLE-GitHub-generic-appimage -O $APP;;
+	2) wget -c -q $URL/templates/AM-SAMPLE-GitHub-generic-deb -O $APP;;
+	3) wget -c -q $URL/templates/AM-SAMPLE-GitHub-generic-tar -O $APP;;
+	4) wget -c -q $URL/templates/AM-SAMPLE-GitHub-generic-zip -O $APP;;
 	*) echo "
 	NO FILE FORMAT HAS BEEN SELECTED, EXITING!
 	"; exit;;
@@ -56,6 +64,7 @@ case "$1" in
 	
 	CREATING A SCRIPT FOR "$APP"
 	" | tr a-z A-Z
+	echo "" 
 	echo " ------------------------------------------------"
 	echo "" 
 	echo " LIST OF CATEGORIES:
@@ -93,9 +102,10 @@ case "$1" in
 	esac
 
 	echo "" 
-	read -r -p " COPY THE LINK URL TO THE ICON AND PASTE IT HERE : " RESPONSE
+	read -r -p " COPY/PASTE THE URL OF THE ICON HERE : " RESPONSE
 	case "$RESPONSE" in
     	*) sed -i s#YOURICONURL#$RESPONSE#g $APP
+	echo "" 
 	echo " ------------------------------------------------"
 	echo "
 
