@@ -1,10 +1,15 @@
 # GitHub To "AM" (github2AM)
-A script to convert apps from Github to installation scripts for "AM" Application Manager.
+A script to convert standalone apps and AppImages from Github to installation scripts for "AM" Application Manager.
 
 ### INSTALL
-Use "AM" to install this script, run the command:
+With "AM":
 
     sudo am -i github2am
+Without "AM":
+
+    wget https://raw.githubusercontent.com/ivan-hc/AM-Application-Manager/main/programs/x86_64/github2am
+    chmod a+x ./github2am
+    sudo ./github2am
     
 ### UNINSTALL
 With "AM":
@@ -15,6 +20,7 @@ Without "AM":
     sudo /opt/github2am/remove
 
 ### USAGE
+
     github2am convert $USER/$REPO
 where `$USER/$REPO` is the name of the repository where the app is stored.
 
